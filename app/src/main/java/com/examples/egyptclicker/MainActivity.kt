@@ -25,7 +25,8 @@ class MainActivity : AppCompatActivity() {
 
     var animationClick: Animation? = null
     var animationCoin: Animation? = null
-    var animationCoin1: Animation? = null
+    var animationCoinRotate1: Animation? = null
+    var animationCoinRotate2: Animation? = null
 
 
 
@@ -43,7 +44,8 @@ class MainActivity : AppCompatActivity() {
         cheers = findViewById<TextView>(R.id.tvCheers)
         animationClick = AnimationUtils.loadAnimation(this, R.anim.anim_click)
         animationCoin = AnimationUtils.loadAnimation(this, R.anim.anim_down_coin)
-        animationCoin1 = AnimationUtils.loadAnimation(this, R.anim.anim_down_coin1)
+        animationCoinRotate1 = AnimationUtils.loadAnimation(this, R.anim.flip_from_middle)
+        animationCoinRotate2 = AnimationUtils.loadAnimation(this, R.anim.flip_to_middle)
     }
 
     //Нажатие на картинку
@@ -90,10 +92,8 @@ class MainActivity : AppCompatActivity() {
         anim.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationStart(animation: Animation) {}
             override fun onAnimationEnd(animation: Animation) {
-
                 img.visibility = View.GONE
             }
-
             override fun onAnimationRepeat(animation: Animation) {}
         })
         img.startAnimation(anim)
