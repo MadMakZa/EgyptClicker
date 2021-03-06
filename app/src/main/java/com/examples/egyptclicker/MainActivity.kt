@@ -8,6 +8,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -45,10 +49,19 @@ class MainActivity : AppCompatActivity() {
     //Нажатие на картинку
     private fun justClick() {
         pharaoh!!.setOnClickListener {
-            counterAdd()
-            pharaoh!!.startAnimation(animationClick)
-
-            coinsRain()
+            GlobalScope.launch(Dispatchers.Main) {
+                counterAdd()
+                pharaoh!!.startAnimation(animationClick)
+                generateCoin()
+            }
+            if (score % 10 == 0){
+                GlobalScope.launch(Dispatchers.Main) {
+                    for(num in 0 until score){
+                        delay(100L)
+                        generateCoin()
+                }
+                }
+            }
         }
     }
 
@@ -60,12 +73,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     //Генерация падающих монеток
-    private fun coinsRain() {
+    private fun generateCoin() {
+
         val img = ImageView(this@MainActivity)
         img.setImageResource(R.drawable.goldcoin)
         constraintLayout!!.addView(img)
         val params = img.layoutParams as ConstraintLayout.LayoutParams
-        val randomX = Random().nextInt(constraintLayout!!.width)
+        val randomX = Random().nextInt((constraintLayout!!.width)-100)
         params.width = 100
         params.height = 100
         img.layoutParams = params
@@ -85,9 +99,5 @@ class MainActivity : AppCompatActivity() {
         img.startAnimation(anim)
     }
 
-    //Бонусный дождь из монеток
-    private fun bonusCoinRain(){
-
-    }
 
 }
