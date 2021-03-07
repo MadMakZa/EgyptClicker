@@ -56,9 +56,9 @@ class MainActivity : AppCompatActivity() {
                 pharaoh!!.startAnimation(animationClick)
                 generateCoin()
             }
-            if (score % 10 == 0 && score != 0){
+            if (score % 100 == 0 && score != 0){
                 GlobalScope.launch(Dispatchers.Main) {
-                    for(num in 0 until score){
+                    for(num in 0 until 50){
                         delay(100L)
                         generateCoin()
                 }
