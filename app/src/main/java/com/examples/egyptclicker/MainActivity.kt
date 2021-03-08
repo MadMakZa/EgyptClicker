@@ -46,6 +46,8 @@ class MainActivity : AppCompatActivity() {
         animationCoin = AnimationUtils.loadAnimation(this, R.anim.anim_down_coin)
         animationCoinRotate1 = AnimationUtils.loadAnimation(this, R.anim.flip_from_middle)
         animationCoinRotate2 = AnimationUtils.loadAnimation(this, R.anim.flip_to_middle)
+
+
     }
 
     //Нажатие на картинку
@@ -58,8 +60,8 @@ class MainActivity : AppCompatActivity() {
             }
             if (score % 100 == 0 && score != 0){
                 GlobalScope.launch(Dispatchers.Main) {
-                    for(num in 0 until 50){
-                        delay(100L)
+                    for(num in 0 until 300){
+                        delay(10L)
                         generateCoin()
                 }
                 }
